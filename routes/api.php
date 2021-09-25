@@ -51,3 +51,9 @@ Route::put('/posts/{post}', function (Post $post) {
 });
 
 });
+Route::delete('/posts/{post}', function (Post $post) {
+    $sucess = $post->delete();
+    return[
+        "Sucessully deleted"=>$sucess
+    ];
+});

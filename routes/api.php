@@ -1,7 +1,7 @@
 <?php
-use app\models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +17,37 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/posts', function (Request $request){
+Route::get('/posts', function(){
     return Post::all();
+});
+
+//create a post
+Route::post('/posts', function () {
+    request()->validate([
+        'title'=>'required',
+        'content'=>'required'
+        ]
+    );
+    return  Post::create([
+        'title'=> request('title'),
+        'content'=> request('content'),
+
+    ]);
+//update a post
+Route::put('posts/{post}', function (Post $post) {
+
+    request()->validate([
+        'title'=>'required',
+        'content'=>'required'
+        ]
+    );
+   $pass= $post->update([
+      'title'=>request('title'),
+      'content'=>request('content')
+    ]);
+
+    return[ "Pass"=>$pass ];
+
+});
+
 });

@@ -34,7 +34,7 @@ Route::post('/posts', function () {
 
     ]);
 //update a post
-Route::put('posts/{post}', function (Post $post) {
+Route::put('/posts/{post}', function (Post $post) {
 
     request()->validate([
         'title'=>'required',
@@ -46,7 +46,7 @@ Route::put('posts/{post}', function (Post $post) {
       'content'=>request('content')
     ]);
 
-    return[ "Pass"=>$pass ];
+    return["Pass"=>$pass];
 
 });
 

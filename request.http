@@ -1,0 +1,33 @@
+
+
+
+
+
+
+###
+GET http://127.0.0.1:8000/api/posts HTTP/1.1
+
+###
+
+
+POST http://127.0.0.1:8000/api/posts HTTP/1.1
+content-type: application/json
+
+{
+ "title": "Hello Sydney",
+ "content": "This is new world of sydney"
+}
+
+###
+PUT http://127.0.0.1:8000/api/posts/3
+content-type: application/json
+
+{
+ "title": "Hello Sydney and brisbane",
+ "content": "Hello updated Sydney and brisbane"
+
+}
+
+###
+DELETE http://127.0.0.1:8000/api/posts/4
+Content-Type:  application/json

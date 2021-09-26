@@ -1,7 +1,10 @@
 <?php
+
+use App\Http\Controllers\PostApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,43 +20,14 @@ use App\Models\Post;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/posts', function(){
-    return Post::all();
-});
+Route::get('/posts', [ PostApiController::class,'index']);
 
 //create a post
-Route::post('/posts', function () {
-    request()->validate([
-        'title'=>'required',
-        'content'=>'required'
-        ]
-    );
-    return  Post::create([
-        'title'=> request('title'),
-        'content'=> request('content'),
+Route::post('/posts', [PostApiController::class,'create']);
 
-    ]);
-//update a post
-Route::put('/posts/{post}', function (Post $post) {
+//Update a post
+Route::put('/posts/{post}', [ PostApiController::class,'update']) ;
 
-    request()->validate([
-        'title'=>'required',
-        'content'=>'required'
-        ]
-    );
-   $pass= $post->update([
-      'title'=>request('title'),
-      'content'=>request('content')
-    ]);
 
-    return["Pass"=>$pass];
-
-});
-
-});
-Route::delete('/posts/{post}', function (Post $post) {
-    $sucess = $post->delete();
-    return[
-        "Sucessully deleted"=>$sucess
-    ];
-});
+//Delete a post
+Route::delete('/posts/{post}',[ PostApiController::class,'destroy']) ;
